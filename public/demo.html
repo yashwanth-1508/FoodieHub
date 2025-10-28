@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Hyderabad Restaurants</title>
+    <style>
+        body {
+            background: linear-gradient(120deg,#f8b400 50%,#f85f73 100%);
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            min-height: 100vh;
+        }
+        .navbar {
+            background: rgba(255,255,255,0.92);
+            padding: 16px 32px;
+            border-bottom-left-radius: 22px;
+            border-bottom-right-radius: 22px;
+            box-shadow: 0 4px 20px rgba(248,95,115,0.09);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 26px;
+        }
+        .navbar img {
+            border-radius: 50%;
+            width: 54px;
+            height: 54px;
+            border: 3px solid #f85f73;
+        }
+        .navbar .links a {
+            color: #181818;
+            font-size: 1.2em;
+            text-decoration: none;
+            padding: 8px 18px;
+            border-radius: 7px;
+            transition: background 0.18s, color 0.18s;
+            margin-right: 6px;
+        }
+        .navbar .links a:hover { background: #f8b400; color: #fff; }
+        .form-container {
+            background: #fff;
+            max-width: 490px;
+            margin: 42px auto 0 auto;
+            padding: 33px 34px 27px 34px;
+            border-radius: 21px;
+            box-shadow: 0 9px 38px rgba(248,95,115,0.18);
+            text-align: center;
+        }
+        .form-container h1 {
+            color: #f85f73;
+            margin-bottom: 21px;
+            font-size: 2em;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        .form-group { margin-bottom: 23px; }
+        .form-row {
+            display: flex;
+            gap: 17px;
+            margin-bottom: 17px;
+        }
+        .form-row .col {
+            flex: 1;
+        }
+        .form-control {
+            width: 100%;
+            padding: 14px 17px;
+            border-radius: 13px;
+            border: 2px solid #f8b400;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+            outline: none;
+            font-family: inherit;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .form-control:focus { border-color: #f85f73; }
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+        button[type="submit"] {
+            background: linear-gradient(90deg,#f8b400,#f85f73);
+            color: #fff;
+            border: none;
+            border-radius: 14px;
+            font-size: 1.17em;
+            font-weight: 600;
+            padding: 14px 0;
+            width: 100%;
+            box-shadow: 0 2px 12px rgba(248,95,115,0.09);
+            cursor: pointer;
+            transition: background 0.18s;
+            letter-spacing: 0.5px;
+        }
+        button[type="submit"]:hover {
+            background: linear-gradient(90deg, #f85f73 80%, #f8b400 100%);
+        }
+        @media (max-width: 520px) {
+            .form-container { padding: 17px 5vw; }
+            .form-row { flex-direction: column; gap: 0;}
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <img src="foodlogo.avif" alt="logo">
+        <div class="links">
+            <a href="user.html">HOME</a>
+            <a href="user.html">MENU</a>
+            <a href="user.html">HELP</a>
+        </div>
+    </div>
+    <div class="form-container">
+        <h1>Contact Us</h1>
+        <form target="_blank" action="https://formsubmit.co/gaddamyashwanth1508@gmail.com" method="POST">
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col">
+                        <input type="text" name="name" class="form-control" placeholder="Full Name" required>
+                    </div>
+                    <div class="col">
+                        <input type="email" name="email" class="form-control" placeholder="Email Address" required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <textarea placeholder="Your Message" class="form-control" name="message" rows="8" required></textarea>
+            </div>
+            <button type="submit">Submit Form</button>
+        </form>
+    </div>
+</body>
+</html>

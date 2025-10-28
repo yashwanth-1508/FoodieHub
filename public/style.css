@@ -1,0 +1,264 @@
+/* starting page */
+
+.body{
+    background-image: url('food1.avif');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 10% 20%;
+
+}
+.main{
+  background: rgba(255, 255,255, 0.9);
+   max-width: 470px;
+   margin: 70px auto;
+   box-shadow: 0 8px 38px rgba(255, 120, 66, 0.18);
+   border-radius: 20px;
+   padding: 38px 36px 25px 36px;
+   text-align: center;
+   position: relative;
+   backdrop-filter: blur(3px);
+}
+
+.main::before
+{
+    content: "🍔";
+  font-size: 3.5rem;
+  position: absolute;
+  left: 50%;
+  top: -43px;
+  transform: translateX(-50%);
+  background: #fffbe8;
+  width: 80px;
+  height: 80px;
+  line-height: 80px;
+  border-radius: 50%;
+  box-shadow: 0 2px 14px #ffd2a6;
+
+}
+.main h1{
+    text-align: center;
+    color: #333;
+}
+.main h3{
+    text-align: center;
+    color: #555;
+}
+.main button
+{
+    
+     background: linear-gradient(90deg, #fd9340 30%, #ffbe6a 80%);
+  border: none;
+  color: #fff;
+  padding: 14px 23px;
+  margin: 10px 7px 12px 0;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.main button:hover{
+   background: linear-gradient(90deg, #ffbe6a 30%, #fd9340 80%);
+  transform: scale(1.05);
+}
+.main3 a {
+  color: #fd9340;
+  text-decoration: underline;
+  transition: color 0.18s;
+}
+
+.main3 a {
+  color: #dbd9d7;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* login/sign up page */
+
+
+
+
+.main2
+{
+     background: rgba(255, 255,255, 0.9);
+   max-width: 370px;
+   margin: 70px auto;
+   box-shadow: 0 8px 38px rgba(255, 120, 66, 0.18);
+   border-radius: 20px;
+   padding: 38px 36px 25px 36px;
+   text-align: center;
+   position: relative;
+   backdrop-filter: blur(3px);
+}
+
+.main2::before
+{
+    content: "🍔";
+  font-size: 3.5rem;
+  position: absolute;
+  left: 50%;
+  top: -43px;
+  transform: translateX(-50%);
+  background: #fffbe8;
+  width: 80px;
+  height: 80px;
+  line-height: 80px;
+  border-radius: 50%;
+  box-shadow: 0 2px 14px #ffd2a6;
+
+}
+.main2 h1{
+    text-align: center;
+    color: #333;
+}
+.main2 h3{
+    text-align: center;
+    color: #555;
+}
+.main2 button{
+  background: linear-gradient(90deg, #fd9340 30%, #ffbe6a 80%);
+  border: none;
+  color: #fff;
+  padding: 14px 23px;
+  margin: 10px 7px 12px 0;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.main2 button:hover
+{
+ background: linear-gradient(90deg, #ffbe6a 30%, #fd9340 80%);
+  transform: scale(1.05);
+}
+
+
+.main2 a {
+  color: #e9e7e6;
+}
+
+
+
+
+
+/* login page */
+.main3
+{
+   background: rgba(255, 255,255, 0.9);
+   max-width: 370px;
+   margin: 70px auto;
+   box-shadow: 0 8px 38px rgba(255, 120, 66, 0.18);
+   border-radius: 20px;
+   padding: 38px 36px 25px 36px;
+   text-align: center;
+   position: relative;
+   backdrop-filter: blur(3px);
+   z-index: 1;
+}
+
+.main3::before
+{
+    content:"🍔";
+  font-size: 3.5rem;
+  position: absolute;
+  left: 50%;
+  top: -43px;
+  transform: translateX(-50%);
+  background: #fffbe8;
+  width: 80px;
+  height: 80px;
+  line-height: 80px;
+  border-radius: 50%;
+  box-shadow: 0 2px 14px #ffd2a6;
+
+}
+.main3 h1 {
+  font-family: 'Poppins', Arial, sans-serif;
+  color: #fd9340;
+  font-size: 2rem;
+  margin-bottom: 10px;
+  text-align: left;
+}
+.main3{
+ display: block;
+  
+  color: #ff8c22;
+  margin-top: 50px;
+  font-weight: 500;
+}
+.main3 input[type="text"], input[type="email"], input[type="password"] {
+  width: 93%;
+  padding: 13px;
+  margin: 9px 0 16px 0;
+  border: 1.5px solid #ffe0b3;
+  border-radius: 9px;
+  background: #fffefd;
+  font-size: 1rem;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+.main3 input:focus {
+  border: 1.5px solid #fd9340;
+  box-shadow: 0 0 5px #fd934020;
+}
+
+.main3 button {
+  background: linear-gradient(90deg, #fd9340 30%, #ffbe6a 80%);
+  border: none;
+  color: #fff;
+  padding: 14px 23px;
+  margin: 10px 7px 12px 0;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.main3 button:hover {
+  background: linear-gradient(90deg, #ffbe6a 30%, #fd9340 80%);
+  transform: scale(1.05);
+}
+
+.main3 a {
+  color: #fd9340;
+  text-decoration: underline;
+  transition: color 0.18s;
+}
+
+.main3 a {
+  color: #a7a7a7;
+}
+
+.videobg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 0;
+}
+
+#bgvideo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100vw;
+  min-height: 100vh;
+  object-fit: cover;
+  z-index: 0;
+}
+

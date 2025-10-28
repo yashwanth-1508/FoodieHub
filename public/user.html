@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unique Restaurant Listing</title>
+    <style>
+        body {
+            background: linear-gradient(110deg,#f8b400 50%,#f85f73 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+        }
+        .navbar {
+            background: rgba(255,255,255,0.87);
+            padding: 16px 32px;
+            border-bottom-left-radius: 22px;
+            border-bottom-right-radius: 22px;
+            box-shadow: 0 4px 20px rgba(248,95,115,0.09);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 26px;
+        }
+        .navbar img {
+            border-radius: 50%;
+            width: 54px;
+            height: 54px;
+            margin-right: 19px;
+            border: 3px solid #f85f73;
+        }
+        .navbar .links a {
+            color: #181818;
+            font-size: 1.2em;
+            text-decoration: none;
+            padding: 8px 18px;
+            border-radius: 7px;
+            transition: background 0.18s, color 0.18s;
+            margin-right: 6px;
+        }
+        .navbar .links a:hover { background: #f8b400; color: #fff; }
+        .search-bar {
+            margin: 22px auto;
+            width: 85vw;
+            display: flex;
+            justify-content: center;
+        }
+        .search-bar input {
+            width: 410px;
+            padding: 12px 24px;
+            font-size: 1.15em;
+            border-radius: 20px;
+            border: 2px solid #f8b400;
+            margin-right: 8px;
+            outline: none;
+            font-family: inherit;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            transition: border-color 0.19s;
+        }
+        .search-bar input:focus { border-color: #f85f73; }
+        .search-bar button {
+            background: linear-gradient(90deg,#f8b400,#f85f73);
+            color: white;
+            border:none;
+            border-radius:20px;
+            font-size:1.15em;
+            padding:12px 28px;
+            cursor:pointer;
+            box-shadow: 0 2px 8px rgba(248,95,115,0.13);
+        }
+        .restaurant-header {
+            font-size:2em; font-weight:700; text-transform: uppercase;
+            color:#fff; margin:36px 0 25px 7vw; letter-spacing:1.7px;
+            text-shadow: 0 3px 8px rgba(0,0,0,0.13);
+        }
+        .restaurants-container {
+            display: flex; flex-wrap: wrap;
+            gap: 26px 42px; padding: 30px 52px 12px 52px;
+            max-width: 1200px; margin: 0 auto;
+        }
+        .card {
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 7px 22px rgba(248,95,115,0.12);
+            overflow: hidden; width: 320px; position: relative;
+            border: 3px solid #f8b400;
+            transition: border-color 0.18s, box-shadow 0.2s;
+        }
+        .card:hover {
+            border-color: #f85f73;
+            box-shadow: 0 11px 38px rgba(248,95,115,0.22);
+        }
+        .card img { width: 100%; height: 170px; object-fit: cover; }
+        .discount-tag {
+            position: absolute;
+            background: #f85f73;
+            color: #fff;
+            top: 17px; left: 18px;
+            padding: 4px 14px; border-radius: 13px; font-size: 1em; font-weight: 500; z-index: 2;
+            box-shadow:0 2px 7px rgba(248,95,115,0.09);
+        }
+        .card-content { padding: 12px 19px 14px 19px; }
+        .card-content h3 { font-size: 1.27em; font-weight: 700; margin: 2px 0 10px 0; color: #f85f73; }
+        .rating { float: right; background: #4cc16a; color: #fff;
+            padding: 3px 12px; border-radius: 10px; font-weight: 600;
+            font-size: 1.08em; margin-top: -5px;
+        }
+        .card-content .cuisines { color: #757575; margin: 7px 0 8px 0; font-size: 1.07em; }
+        .meta { display: flex; justify-content: space-between; color: #7a7a7a; font-size: 1.06em; margin-top: 9px; }
+        .card-content button { padding:6px 17px;background:linear-gradient(90deg,#f8b400 60%,#f85f73 100%);color:#fff;border:none;border-radius:8px;margin-top:10px;cursor:pointer;font-size:1em;font-weight:600;box-shadow:0 1px 7px rgba(248,95,115,0.11);}
+        #cartContainer {
+            width:95%;max-width:550px;margin:35px auto 30px auto;
+            background:#fff;border-radius:18px;padding:25px;
+            box-shadow:0 7px 28px rgba(248,95,115,0.12);
+        }
+        #cartContainer h2 { margin-top:0;font-size:1.36em;color:#f85f73;}
+        #cartList { margin:0 0 18px 0; padding-left:19px;}
+        #cartList li {font-size:1.06em;}
+        #cartTotal {font-weight:700; font-size:1.15em; color:#f8b400;}
+        .cart-actions { margin-top:12px;}
+        .cart-actions button {margin-right:10px; padding:5px 16px; background:#f85f73;color:#fff;border:none;border-radius:7px;font-size:1em;cursor:pointer;}
+        #orderMsg {display:block;margin-top:15px;font-size:1.12em;font-weight:700;color:#f85f73;}
+        @media (max-width: 700px) {
+            .restaurants-container { flex-direction:column; align-items:center; padding:15px 6vw;}
+            .card { max-width:90vw;}
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <img src="foodlogo.avif" alt="logo">
+        <div class="links">
+            <a href="user.html">HOME</a>
+            <a href="user.html">ABOUT US</a>
+            <a href="user.html">HELP</a>
+            <a href="demo.html">CONTACT US </a>
+        </div>
+    </div>
+
+    <form class="search-bar" onsubmit="event.preventDefault();">
+        <input id="searchInput" type="text" placeholder="Search restaurants or cuisines...">
+        <button type="submit">Search</button>
+    </form>
+
+    <div class="restaurant-header">RESTAURENTS IN HYDERABAD</div>
+
+    <div class="restaurants-container" id="restaurantsContainer">
+        <div class="card" data-name="MS Mandi & Shawarma" data-cuisines="North Indian, Mandi, Fast..." data-price="400">
+          <div class="discount-tag">50% OFF</div>
+          <img src="mandi.avif" alt="MS Mandi & Shawarma">
+          <div class="card-content">
+            <h3>MS Mandi & Shawarma</h3>
+            <span class="rating">4.1</span>
+            <p class="cuisines">North Indian, Mandi, Fast...</p>
+            <div class="meta">
+              <span>&#8377;400 for one</span>
+              <span>28 min</span>
+            </div>
+            <button onclick="addToCart('MS Mandi & Shawarma', 400)">Add to Cart</button>
+          </div>
+        </div>
+        <div class="card" data-name="Grand Hotel-since 1993" data-cuisines="North Indian, Biryani, Fast..." data-price="300">
+          <div class="discount-tag">20% OFF</div>
+          <img src="biryani.webp" alt="biryani">
+          <div class="card-content">
+            <h3>Grand Hotel-since 1993</h3>
+            <span class="rating">3.1</span>
+            <p class="cuisines">North Indian, Biryani, Fast...</p>
+            <div class="meta">
+              <span>&#8377;300 for one</span>
+              <span>15 min</span>
+            </div>
+            <button onclick="addToCart('Grand Hotel-since 1993', 300)">Add to Cart</button>
+          </div>
+        </div>
+        <div class="card" data-name="Pista House" data-cuisines="Chinese, Kabab, Biryani..." data-price="260">
+          <div class="discount-tag">20% OFF</div>
+          <img src="kabab.jpeg" alt="pistahouse">
+          <div class="card-content">
+            <h3>Pista House</h3>
+            <span class="rating">4.5</span>
+            <p class="cuisines">Chinese, Kabab, Biryani...</p>
+            <div class="meta">
+              <span>&#8377;260 for one</span>
+              <span>15 min</span>
+            </div>
+            <button onclick="addToCart('Pista House', 260)">Add to Cart</button>
+          </div>
+        </div>
+        <div class="card" data-name="Hotel Sohail" data-cuisines="North Indian, Mughal, Kebab..." data-price="400">
+          <div class="discount-tag">30% OFF</div>
+          <img src="sohail.jpg" alt="sohail">
+          <div class="card-content">
+            <h3>Hotel Sohail</h3>
+            <span class="rating">5</span>
+            <p class="cuisines">North Indian, Mughal, Kebab...</p>
+            <div class="meta">
+              <span>&#8377;400 for one</span>
+              <span>39 min</span>
+            </div>
+            <button onclick="addToCart('Hotel Sohail', 400)">Add to Cart</button>
+          </div>
+        </div>
+        <div class="card" data-name="Burger King" data-cuisines="Burger, Fastfood, Coffee..." data-price="200">
+          <div class="discount-tag">50% OFF</div>
+          <img src="burger.avif" alt="burger">
+          <div class="card-content">
+            <h3>Burger King</h3>
+            <span class="rating">3.9</span>
+            <p class="cuisines">Burger, Fastfood, Coffee...</p>
+            <div class="meta">
+              <span>&#8377;200 for one</span>
+              <span>28 min</span>
+            </div>
+            <button onclick="addToCart('Burger King', 200)">Add to Cart</button>
+          </div>
+        </div>
+        <div class="card" data-name="KFC" data-cuisines="Burger..." data-price="100">
+          <div class="discount-tag">50% OFF</div>
+          <img src="kfc.jpeg" alt="KFC">
+          <div class="card-content">
+            <h3>KFC</h3>
+            <span class="rating">3.0</span>
+            <p class="cuisines">Burger...</p>
+            <div class="meta">
+              <span>&#8377;100 for one</span>
+              <span>28 min</span>
+            </div>
+            <button onclick="addToCart('KFC', 100)">Add to Cart</button>
+          </div>
+        </div>
+        <div class="card" data-name="MS Mandi & Shawarma" data-cuisines="North Indian, Mandi, Fast..." data-price="400">
+          <div class="discount-tag">50% OFF</div>
+          <img src="biryani.webp" alt="MS Mandi & Shawarma">
+          <div class="card-content">
+            <h3>MS Mandi & Shawarma</h3>
+            <span class="rating">4.1</span>
+            <p class="cuisines">North Indian, Mandi, Fast...</p>
+            <div class="meta">
+              <span>&#8377;400 for one</span>
+              <span>28 min</span>
+            </div>
+            <button onclick="addToCart('MS Mandi & Shawarma', 400)">Add to Cart</button>
+          </div>
+        </div>
+    </div>
+
+    <div id="cartContainer">
+        <h2>Cart</h2>
+        <ul id="cartList"></ul>
+        <span id="cartTotal"></span>
+        <div class="cart-actions">
+            <button onclick="placeOrder()">Place Order</button>
+            <button onclick="clearCart()">Clear Cart</button>
+        </div>
+        <span id="orderMsg"></span>
+    </div>
+
+    <script>
+        let cart = [];
+
+        // Search filtering
+        function filterRestaurants() {
+            let term = document.getElementById('searchInput').value.trim().toLowerCase();
+            document.querySelectorAll('.restaurants-container .card').forEach(card => {
+                let name = card.getAttribute('data-name').toLowerCase();
+                let cuisines = card.getAttribute('data-cuisines').toLowerCase();
+                if(name.includes(term) || cuisines.includes(term)) {
+                    card.style.display = "";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+        document.getElementById('searchInput').addEventListener('input', filterRestaurants);
+
+        function addToCart(name, price) {
+            const idx = cart.findIndex(item => item.name === name && item.price === price);
+            if (idx !== -1) cart[idx].qty += 1;
+            else cart.push({name, price, qty: 1});
+            renderCart();
+        }
+
+        function renderCart() {
+            const cartList = document.getElementById('cartList');
+            const cartTotal = document.getElementById('cartTotal');
+            cartList.innerHTML = '';
+            let total = 0;
+            if (cart.length === 0) {
+                cartList.innerHTML = '<li>No items in cart.</li>';
+                cartTotal.textContent = '';
+            } else {
+                cart.forEach((item, i) => {
+                    total += item.price * item.qty;
+                    let li = document.createElement('li');
+                    li.textContent = `${item.name} - ₹${item.price} x ${item.qty} `;
+                    let rmBtn = document.createElement('button');
+                    rmBtn.textContent = "Remove";
+                    rmBtn.style.marginLeft = "10px";
+                    rmBtn.style.background = "#f85f73";
+                    rmBtn.style.color = "#fff";
+                    rmBtn.style.border = "none";
+                    rmBtn.style.borderRadius = "4px";
+                    rmBtn.style.cursor = "pointer";
+                    rmBtn.onclick = function() {
+                        cart.splice(i,1); renderCart();
+                    }
+                    li.appendChild(rmBtn);
+                    cartList.appendChild(li);
+                });
+                cartTotal.textContent = "Total: ₹" + total;
+            }
+            // document.getElementById('orderMsg').textContent = "";
+        }
+
+        function placeOrder() {
+            const orderMsg = document.getElementById('orderMsg');
+            if (cart.length === 0) {
+                orderMsg.textContent = "No items in cart!";
+                orderMsg.style.color = '#f85f73';
+                return;
+            }
+            let total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+            orderMsg.textContent = `Order placed! Total amount: ₹${total}. Thank you for ordering.`;
+            orderMsg.style.color = '#4cc16a';
+            cart = [];
+            renderCart();
+        }
+
+        function clearCart() {
+            cart = [];
+            renderCart();
+            const orderMsg = document.getElementById('orderMsg');
+            orderMsg.textContent = "Cart cleared.";
+            orderMsg.style.color = '#f85f73';
+        }
+
+        // Initialize cart and search
+        renderCart();
+    </script>
+</body>
+</html>
